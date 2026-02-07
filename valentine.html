@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For My Valentine ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:Poppins;
+    background: linear-gradient(135deg,#ff9a9e,#fecfef);
+    text-align:center;
+    color:white;
+}
+
+/* FIRST PAGE */
+.hero{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+button{
+    padding:15px 35px;
+    font-size:22px;
+    border:none;
+    border-radius:12px;
+    margin:15px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+#yesBtn{ background:#00c853; }
+#noBtn{ background:#ff1744; }
+
+#message{
+    margin-top:15px;
+    font-size:22px;
+}
+
+img{
+    width:280px;
+    border-radius:18px;
+    margin-top:15px;
+}
+
+/* after yes */
+#afterYes{
+    display:none;
+    background:#fff0f5;
+    color:#333;
+    padding:40px;
+}
+
+.memoryBtn{
+    display:block;
+    margin:25px auto;
+    padding:15px 25px;
+    font-size:20px;
+    background:#ff4081;
+    color:white;
+    border:none;
+    border-radius:12px;
+}
+
+/* popup */
+#popup{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.85);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+#popup img{
+    width:350px;
+}
+
+.caption{
+    color:white;
+    font-size:28px;
+    font-family:'Great Vibes', cursive;
+    margin-top:10px;
+}
+
+/* letter */
+.letter{
+    max-width:700px;
+    margin:60px auto;
+    font-family:'Great Vibes', cursive;
+    font-size:26px;
+    line-height:1.8;
+}
+</style>
+</head>
+
+<body>
+
+<!-- FIRST PAGE -->
+<div class="hero" id="firstPage">
+    <h1>Will you be my Valentine? ❤️</h1>
+
+    <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+    <button id="noBtn" onclick="noClicked()">No 😢</button>
+
+    <div id="message"></div>
+    <div id="noPic"></div>
+</div>
+
+<!-- AFTER YES -->
+<div id="afterYes">
+    <h1>You said YES 😍</h1>
+
+    <button class="memoryBtn" onclick="openPic('First_PIC.jpeg','Our first memory together ❤️')">
+        Wanna see us?<3
+    </button>
+
+    <button class="memoryBtn" onclick="openPic('Sunflower.jpeg','You make my world brighter ✨')">
+        You know what would I be If I was a Flower?!
+    </button>
+
+    <button class="memoryBtn" onclick="openPic('hot.jpeg','My gawwdddd..Why this person sooo dammnnn HOT 💕')">
+        Wanna see who is more hotter than SUN?!
+    </button>
+    <button class="memoryBtn" onclick="openPic('My_Pookie.jpeg','Why are you so cuteee, even a baby girl cannot be that cute💋')">
+        You know my BABY?
+    </button>
+
+    <div class="letter">
+        My love,<br><br>
+        I don’t know what magic you brought into my life,
+        but everything feels brighter with you.
+        Thank you for being my smile,
+        my comfort and my happiness.
+        <br><br>
+        I promise to stand with you,
+        laugh with you,
+        and make memories together.
+        <br><br>
+        Always yours ❤️
+    </div>
+</div>
+
+<!-- POPUP -->
+<div id="popup" onclick="closePopup()">
+    <img id="popupImg">
+    <div class="caption" id="popupText"></div>
+</div>
+
+<script>
+let noSize=22;
+let yesSize=22;
+let noClickCount=0;
+
+function noClicked(){
+    noClickCount++;
+
+    noSize -= 4;
+    yesSize += 8;
+
+    document.getElementById("noBtn").style.fontSize=noSize+"px";
+    document.getElementById("yesBtn").style.fontSize=yesSize+"px";
+
+    let messages=[
+        "Are you sure? 🥺",
+        "Think again 😭",
+        "Please reconsider 💔",
+        "I’ll keep asking 😌"
+    ];
+
+    document.getElementById("message").innerText =
+        messages[Math.min(noClickCount-1, messages.length-1)];
+
+    // show picture when NO
+    let pics=["Me_Baby.jpeg","valentinee.jpeg"];
+    let pic=pics[Math.floor(Math.random()*pics.length)];
+
+    document.getElementById("noPic").innerHTML =
+        `<img src="${pic}">`;
+}
+
+function yesClicked(){
+    document.getElementById("firstPage").style.display="none";
+    document.getElementById("afterYes").style.display="block";
+}
+
+function openPic(img,text){
+    document.getElementById("popup").style.display="flex";
+    document.getElementById("popupImg").src=img;
+    document.getElementById("popupText").innerText=text;
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+}
+</script>
+
+</body>
+</html>
